@@ -365,6 +365,16 @@
     </script>
 
     <script>
+        // 1. قائمة خلفيات الفئات
+const bgImages = {
+    football: "football.jpg", // ملعب
+    animals: "animal.jpg", // غابة
+    babalhara: "babalhara.jpg", // حي قديم
+    food: "food.jpg", // طعام
+    cities: "116.jpg", // مدينة
+    tech: "tech.jpg", // تكنولوجيا
+    default: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070" // الافتراضي
+};
         // --- البيانات ---
         const data = {
             football: [
@@ -584,6 +594,11 @@
         }
 
         function startGame(cat) {
+            // 1. تغيير الخلفية حسب الفئة (هذا هو الكود الجديد)
+            const bg = bgImages[cat] || bgImages.default;
+            document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('${bg}')`;
+
+            // 2. باقي منطق اللعبة الطبيعي
             const arr = data[cat] || data.football;
             wordObj = arr[Math.floor(Math.random() * arr.length)];
             currentSpyIdx = Math.floor(Math.random() * players.length);
@@ -739,4 +754,5 @@
     </script>
 </body>
 </html>
+
 
