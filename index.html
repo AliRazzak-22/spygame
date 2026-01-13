@@ -66,15 +66,16 @@
         
         p { font-size: 16px; line-height: 1.6; color: #bdc3c7; }
 
-        /* التوقيع */
+       /* التوقيع (تم نقله لليمين) */
         .credits {
+            position: absolute; /* تحرير العنصر من مكانه */
+            top: 20px;          /* نفس ارتفاع زر الشرح */
+            right: 20px;        /* وضعه في أقصى اليمين */
             font-size: 11px;
             color: var(--gold);
-            margin-bottom: 25px;
             border: 1px solid var(--gold);
             padding: 5px 15px;
             border-radius: 50px;
-            display: inline-block;
             background: rgba(0,0,0,0.3);
         }
 
@@ -792,6 +793,7 @@ const bgImages = {
     </script>
 </body>
 </html>
+
 
 
 
