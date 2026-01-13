@@ -227,6 +227,7 @@
     <div class="container">
         
         <div id="screen-setup">
+            <button onclick="showTutorial()" style="position: absolute; top: 20px; left: 20px; width: auto; padding: 8px 15px; font-size: 14px; background: rgba(0,0,0,0.4); border: 1px solid #d4af37; color: #d4af37; border-radius: 20px; z-index: 10;">❓ شرح اللعبة</button>
             <div class="credits">تم التطوير بواسطة: علي رزاق 💎</div>
             <h1>🕵️ الجاسوس المحترف</h1>
             <p>سجل أسماء اللاعبين (كل اسم في سطر):</p>
@@ -340,7 +341,34 @@
             <button onclick="playAgain()">جولة أخرى (نفس اللاعبين)</button>
             <button class="secondary" onclick="location.reload()">خروج / لعبة جديدة</button>
         </div>
+<div id="screen-tutorial" class="hidden">
+            <h1 style="color: var(--gold); margin-bottom: 20px;">📜 كيف تلعب؟</h1>
+            
+            <div style="text-align: right; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid #444; margin-bottom: 20px; line-height: 1.8;">
+                <p style="font-size: 16px; color: #fff;">
+                    <b>لعبة الجاسوس</b> هي تحدٍ عالمي للمجموعات (3 لاعبين أو أكثر).
+                </p>
+                <p style="font-size: 15px; color: #ccc;">
+                    🕵️‍♂️ <b>الفكرة:</b> الجميع يعرف "كلمة السر" للجولة، ما عدا شخص واحد هو <b>"الجاسوس"</b>.
+                </p>
+                <hr style="border-color: #444; opacity: 0.5;">
+                <p style="font-size: 15px; color: #ccc;">
+                    🤖 <b>دور التطبيق:</b><br>
+                    هذا النظام هو "الحكم" الذي سيساعدكم على:
+                    <ul style="padding-right: 20px; margin-top: 5px; color: var(--gold);">
+                        <li>توزيع الأدوار سراً (تمرير الهاتف).</li>
+                        <li>إدارة التصويت وكشف النتائج.</li>
+                        <li>احتساب النقاط تلقائياً.</li>
+                    </ul>
+                </p>
+                <hr style="border-color: #444; opacity: 0.5;">
+                <p style="text-align: center; font-weight: bold; color: #fff; margin-top: 15px;">
+                    اجلسوا معاً، أدخلوا أسماءكم، واستعدوا للقليل من الكذب والخداع والذكاء! 😉
+                </p>
+            </div>
 
+            <button onclick="hideTutorial()">فهمت، رجوع للقائمة ✅</button>
+        </div>
     </div>
 
     <script>
@@ -751,8 +779,19 @@ const bgImages = {
             document.getElementById(hideId).classList.add('hidden');
             document.getElementById(showId).classList.remove('hidden');
         }
+        // --- دوال تشغيل الشرح ---
+        function showTutorial() {
+            document.getElementById('screen-setup').classList.add('hidden');
+            document.getElementById('screen-tutorial').classList.remove('hidden');
+        }
+
+        function hideTutorial() {
+            document.getElementById('screen-tutorial').classList.add('hidden');
+            document.getElementById('screen-setup').classList.remove('hidden');
+        }
     </script>
 </body>
 </html>
+
 
 
