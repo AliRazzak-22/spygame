@@ -2,244 +2,370 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة الجاسوس - الإصدار المطور</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>لعبة الجاسوس - النسخة الملكية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* --- CSS: التصميم --- */
+        /* --- CSS: التصميم الفاخر --- */
+        :root {
+            --gold: #d4af37;
+            --dark-gold: #aa8c2c;
+            --black-bg: #1a1a1a;
+            --glass: rgba(30, 30, 30, 0.85);
+            --danger: #c0392b;
+            --success: #27ae60;
+            --text-main: #ecf0f1;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #2c3e50;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070');
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--black-bg);
+            /* خلفية غامضة وفخمة */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            color: white;
-            text-align: center;
-            padding: 20px;
+            color: var(--text-main);
             margin: 0;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
 
+        /* الحاوية الزجاجية */
         .container {
-            background-color: rgba(44, 62, 80, 0.9);
-            backdrop-filter: blur(8px);
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            width: 95%;
-            max-width: 500px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            width: 90%;
+            max-width: 480px;
+            border: 1px solid rgba(212, 175, 55, 0.2); /* إطار ذهبي خفيف */
+            text-align: center;
             position: relative;
-            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
         }
 
-        .credits {
-            font-size: 12px;
-            color: #bdc3c7;
-            margin-bottom: 20px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* النصوص */
+        h1 { 
+            color: var(--gold); 
+            margin: 0 0 20px 0; 
+            font-weight: 900; 
             letter-spacing: 1px;
-            background: rgba(0,0,0,0.3);
+            text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+        }
+        
+        p { font-size: 16px; line-height: 1.6; color: #bdc3c7; }
+
+        /* التوقيع */
+        .credits {
+            font-size: 11px;
+            color: var(--gold);
+            margin-bottom: 25px;
+            border: 1px solid var(--gold);
             padding: 5px 15px;
-            border-radius: 20px;
+            border-radius: 50px;
             display: inline-block;
+            background: rgba(0,0,0,0.3);
         }
 
-        h1 { color: #f1c40f; margin: 10px 0 20px 0; text-shadow: 2px 2px 4px #000; }
-        h2 { font-size: 24px; margin: 10px 0; }
-        
+        /* حقول الإدخال */
         textarea, input {
             width: 100%;
             padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 12px;
-            border: 2px solid #34495e;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border: 2px solid #444;
+            background-color: rgba(255,255,255,0.05);
+            color: white;
             font-size: 16px;
-            box-sizing: border-box;
-            background-color: #ecf0f1;
-            color: #2c3e50;
             font-family: inherit;
+            box-sizing: border-box;
+            transition: 0.3s;
         }
+        textarea:focus { border-color: var(--gold); outline: none; background-color: rgba(255,255,255,0.1); }
 
-        textarea { height: 100px; resize: vertical; }
-
+        /* الأزرار */
         button {
             width: 100%;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 15px;
             border: none;
             font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            color: white;
-            background-color: #e74c3c;
-            box-shadow: 0 4px 0 #c0392b;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            color: #1a1a1a;
+            background: linear-gradient(45deg, var(--gold), var(--dark-gold));
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            font-family: 'Tajawal', sans-serif;
         }
 
-        button:active { transform: translateY(4px); box-shadow: none; }
-        button.secondary { background-color: #95a5a6; box-shadow: 0 4px 0 #7f8c8d; }
-        button.category-btn { background-color: #3498db; box-shadow: 0 4px 0 #2980b9; }
-        button.vote-btn { background-color: #8e44ad; box-shadow: 0 4px 0 #732d91; margin-bottom: 8px; font-size: 16px; }
-
-        .hidden { display: none; }
+        button:active { transform: scale(0.98); box-shadow: none; }
         
-        .card {
+        button.secondary { 
+            background: #444; 
+            color: white; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3); 
+        }
+        
+        button.vote-btn {
+            background: linear-gradient(45deg, #8e44ad, #6c3483);
+            color: white;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        /* الفئات */
+        .category-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .category-btn {
+            background: rgba(255,255,255,0.1);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            box-shadow: none;
+        }
+        .category-btn:hover { background: var(--gold); color: #000; }
+
+        /* --- تصميم البطاقة القلابة (3D Flip Card) --- */
+        .flip-card {
+            background-color: transparent;
+            width: 280px;
+            height: 350px;
+            perspective: 1000px;
+            margin: 20px auto;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 2px solid var(--gold);
+        }
+
+        /* وجه البطاقة (غامض) */
+        .flip-card-front {
+            background: linear-gradient(135deg, #111, #222);
+            color: var(--gold);
+        }
+        .flip-card-front span { font-size: 60px; margin-bottom: 10px; }
+        .tap-hint { font-size: 14px; opacity: 0.7; animation: pulse 1.5s infinite; }
+
+        /* ظهر البطاقة (الكشف) */
+        .flip-card-back {
             background: #fff;
             color: #2c3e50;
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-            border-right: 5px solid #f1c40f;
+            transform: rotateY(180deg);
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); /* زخرفة خفيفة */
         }
 
         .word-reveal {
-            font-size: 32px;
-            font-weight: 800;
-            color: #d35400;
-            display: block;
+            font-size: 38px;
+            font-weight: 900;
             margin: 15px 0;
+            display: block;
         }
 
+        @keyframes pulse {
+            0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; }
+        }
+
+        /* --- جداول ونتائج --- */
         .score-table {
             width: 100%;
             margin-top: 15px;
             border-collapse: collapse;
+            font-size: 16px;
         }
-        .score-table th, .score-table td {
-            padding: 8px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-        }
-        .score-table th { color: #f1c40f; }
+        .score-table th { color: var(--gold); padding: 10px; border-bottom: 1px solid #444; }
+        .score-table td { padding: 10px; border-bottom: 1px solid #333; }
+        
+        .hidden { display: none; }
 
-        .rules-box {
-            background: rgba(0,0,0,0.3);
-            padding: 15px;
-            border-radius: 10px;
-            text-align: right;
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        .rules-box ul { padding-right: 20px; margin: 0; }
+        /* أيقونات الحالة */
+        .status-icon { font-size: 50px; margin-bottom: 15px; display: block; }
+
     </style>
 </head>
 <body>
 
     <div class="container">
+        
         <div id="screen-setup">
-            <div class="credits">تم الإنشاء والتطوير بواسطة علي رزاق</div>
-            <h1>🕵️ لعبة الجاسوس</h1>
-            <p>أدخل أسماء اللاعبين (كل اسم في سطر):</p>
-            <textarea id="playerNamesInput" placeholder="علي&#10;محمد&#10;سارة&#10;أحمد"></textarea>
-            <button onclick="processNames()">التالي</button>
+            <div class="credits">تم التطوير بواسطة: علي رزاق 💎</div>
+            <h1>🕵️ الجاسوس المحترف</h1>
+            <p>سجل أسماء اللاعبين (كل اسم في سطر):</p>
+            <textarea id="playerNamesInput" placeholder="علي&#10;محمد&#10;حسين&#10;زيد"></textarea>
+            <button onclick="processNames()">بدء الإعداد</button>
         </div>
 
         <div id="screen-difficulty" class="hidden">
-            <h1>اختر المستوى</h1>
-            <button class="category-btn" onclick="showRules('hard')">🔥 المستوى الصعب</button>
-            <button class="category-btn" onclick="showRules('easy')">😌 المستوى السهل</button>
+            <h1>مستوى التحدي</h1>
+            <button onclick="showRules('hard')">🔥 صعب (تمويه كامل)</button>
+            <button class="secondary" onclick="showRules('easy')">😌 سهل (الجاسوس يعرف نفسه)</button>
         </div>
 
         <div id="screen-rules" class="hidden">
-            <h1 id="rulesTitle">قوانين اللعبة</h1>
-            <div class="rules-box" id="rulesText">
-                </div>
-            <button onclick="confirmDifficulty()">موافق، ابدأ اللعب</button>
+            <h2 id="rulesTitle" style="color:var(--gold)"></h2>
+            <div style="text-align: right; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                <ul id="rulesList" style="padding-right: 20px; margin: 0; font-size: 15px;"></ul>
+            </div>
+            <button onclick="confirmDifficulty()">موافق، انطلق</button>
             <button class="secondary" onclick="goBackToDifficulty()">رجوع</button>
         </div>
 
         <div id="screen-category" class="hidden">
-            <h1>اختر موضوع الجولة</h1>
-            <button class="category-btn" onclick="startGame('football')">⚽ أساطير كرة القدم</button>
-            <button class="category-btn" onclick="startGame('animals')">🦁 عالم الحيوان</button>
-            <button class="category-btn" onclick="startGame('babalhara')">🚪 باب الحارة</button>
-            <button class="category-btn" onclick="startGame('food')">🍕 مأكولات</button>
-            <button class="category-btn" onclick="startGame('cities')">🌍 مدن وعواصم</button>
+            <h1>اختر الموضوع</h1>
+            <div class="category-grid">
+                <button class="category-btn" onclick="startGame('football')">⚽ كرة قدم</button>
+                <button class="category-btn" onclick="startGame('animals')">🦁 حيوانات</button>
+                <button class="category-btn" onclick="startGame('babalhara')">🚪 باب الحارة</button>
+                <button class="category-btn" onclick="startGame('food')">🍛 أكلات</button>
+                <button class="category-btn" onclick="startGame('cities')">🌍 مدن</button>
+                <button class="category-btn" onclick="startGame('tech')">💻 تكنولوجيا</button>
+            </div>
         </div>
 
         <div id="screen-pass" class="hidden">
-            <h1>🛑 قف!</h1>
-            <p>أعطِ الهاتف إلى:</p>
-            <h2 id="currentPlayerName" style="color: #f1c40f; font-size: 35px;">...</h2>
-            <button onclick="showRole()">اضغط لكشف دورك</button>
+            <span class="status-icon">📱</span>
+            <h1>سلم الهاتف لـ</h1>
+            <h2 id="currentPlayerName" style="color: var(--gold); font-size: 40px; margin: 20px 0;">...</h2>
+            <button onclick="showRoleScreen()">أنا هو، أرني دوري</button>
         </div>
 
         <div id="screen-reveal" class="hidden">
-            <p>مرحباً <span id="revealName" style="color: #3498db; font-weight: bold;"></span></p>
-            <div class="card">
-                كلمتك السرية هي:
-                <span id="theWord" class="word-reveal">...</span>
+            <p>أهلاً <span id="revealName" style="color: var(--gold); font-weight: bold;"></span></p>
+            
+            <div class="flip-card" onclick="flipCard()">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <span>🕵️‍♂️</span>
+                        <p style="font-size: 20px; font-weight: bold;">اضغط لكشف السر</p>
+                        <p class="tap-hint">(انقر لقلب البطاقة)</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <p style="color: #7f8c8d; font-size: 14px; margin-bottom: 5px;">كلمتك السرية:</p>
+                        <span id="theWord" class="word-reveal">...</span>
+                        <div style="width: 80%; height: 2px; background: #eee; margin: 10px auto;"></div>
+                        <p id="spyHint" style="font-size: 13px; color: #555; padding: 0 10px;">...</p>
+                    </div>
+                </div>
             </div>
-            <p id="spyHint" style="font-size: 13px; color: #bdc3c7;">تذكر هذه الكلمة جيداً!</p>
-            <button onclick="nextPlayer()">فهمت، التالي</button>
+
+            <button onclick="nextPlayer()">حفظت الكلمة (التالي)</button>
         </div>
 
         <div id="screen-discussion" class="hidden">
-            <span style="font-size: 60px;">🗣️</span>
-            <h1>وقت النقاش!</h1>
-            <div class="card" style="padding: 15px;">
-                <p>كل لاعب يقول جملة واحدة عن كلمته.</p>
-                <p>حاولوا كشف الجاسوس، وحاول يا جاسوس الاندماج!</p>
+            <span class="status-icon">🗣️</span>
+            <h1>بدأ النقاش!</h1>
+            <p>الآن، ليتحدث الجميع عن كلمتهم بجملة واحدة.</p>
+            <div style="background: rgba(192, 57, 43, 0.2); padding: 15px; border-radius: 10px; border: 1px solid var(--danger);">
+                <p style="color: #ffadad; margin:0;">⚠️ انتبهوا! الجاسوس بينكم ويحاول الاندماج.</p>
             </div>
-            <button onclick="startVotingSetup()">انتهى النقاش، بدء التصويت</button>
+            <br>
+            <button onclick="startVotingSetup()">انتهى الوقت (التصويت)</button>
         </div>
 
         <div id="screen-vote-pass" class="hidden">
-            <h1>🗳️ وقت التصويت</h1>
+            <h1>🗳️ تصويت سري</h1>
             <p>أعطِ الهاتف إلى:</p>
-            <h2 id="currentVoterName" style="color: #e74c3c; font-size: 35px;">...</h2>
-            <p style="font-size: 12px;">(التصويت سري للغاية!)</p>
+            <h2 id="currentVoterName" style="color: var(--gold); font-size: 35px;">...</h2>
             <button onclick="showVotingScreen()">جاهز للتصويت</button>
         </div>
 
         <div id="screen-vote-action" class="hidden">
-            <h3>يا <span id="voterNameAction"></span>، من هو الجاسوس؟</h3>
+            <h3>يا <span id="voterNameAction" style="color:var(--gold)"></span>، من تتهم؟</h3>
             <div id="votingButtonsContainer"></div>
         </div>
 
         <div id="screen-results" class="hidden">
-            <h1>🏁 النتائج</h1>
+            <h1>🏁 النتائج النهائية</h1>
             
-            <div class="card" style="border-right-color: #e74c3c;">
-                <p>الجاسوس كان: <b id="realSpyName" style="font-size: 20px; color: #c0392b;"></b></p>
-                <p>كلمة المواطنين: <b id="citizenWordDisplay" style="color: #27ae60;"></b></p>
-                <p>كلمة الجاسوس: <b id="spyWordResultDisplay" style="color: #d35400;"></b></p>
+            <div style="background: white; color: #333; padding: 20px; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+                <p style="font-size: 14px; margin-top:0;">الجاسوس الحقيقي:</p>
+                <h2 id="realSpyName" style="color: var(--danger); font-size: 30px; margin: 5px 0;"></h2>
+                <hr style="border:0; border-top:1px dashed #ccc;">
+                <div style="display: flex; justify-content: space-around;">
+                    <div>
+                        <small>المواطنين</small><br>
+                        <b id="citizenWordDisplay" style="color: var(--success); font-size: 18px;"></b>
+                    </div>
+                    <div>
+                        <small>الجاسوس</small><br>
+                        <b id="spyWordResultDisplay" style="color: var(--danger); font-size: 18px;"></b>
+                    </div>
+                </div>
             </div>
 
-            <h3>📊 جدول النقاط</h3>
+            <h3>🏆 ترتيب النقاط</h3>
             <table class="score-table">
-                <thead>
-                    <tr>
-                        <th>اللاعب</th>
-                        <th>النقاط</th>
-                    </tr>
-                </thead>
-                <tbody id="scoreTableBody">
-                    </tbody>
+                <tbody id="scoreTableBody"></tbody>
             </table>
             <br>
             <button onclick="playAgain()">جولة أخرى (نفس اللاعبين)</button>
-            <button class="secondary" onclick="location.reload()">لعبة جديدة كلياً</button>
+            <button class="secondary" onclick="location.reload()">خروج / لعبة جديدة</button>
         </div>
+
     </div>
 
     <script>
-        // --- البيانات ---
-        const bgImages = {
-            default: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070",
-            football: "football.jpg",
-            animals: "animal.jpg",
-            babalhara: "babalhara.jpg",
-            food: "food.jpg",
-            cities: "116.jpg"
+        // روابط أصوات
+        const audio = {
+            flip: new Audio('https://www.soundjay.com/misc/sounds/page-flip-01a.mp3'),
+            click: new Audio('https://www.soundjay.com/button/sounds/button-20.mp3'), // صوت ناعم
+            win: new Audio('https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3')
         };
 
+        function playSound(type) {
+            try {
+                audio[type].currentTime = 0;
+                audio[type].play();
+            } catch(e) { console.log("Audio Error"); }
+        }
+
+        // تفعيل الصوت لكل الأزرار تلقائياً
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => playSound('click'));
+        });
+    </script>
+
+    <script>
+        // --- البيانات ---
         const data = {
             football: [
                 // أساطير الكلاسيكو (ريال مدريد وبرشلونة 1999-الآن)
@@ -396,269 +522,220 @@
         { common: "إسطنبول", spy: "أنقرة" },
         { common: "موسكو", spy: "برلين" },
         { common: "طهران", spy: "أصفهان" }
-    ]
+    ],
+            tech: [
+                { common: "آيفون", spy: "سامسونج" },
+                { common: "فيسبوك", spy: "تويتر" },
+                { common: "لابتوب", spy: "آيباد" },
+                { common: "واي فاي", spy: "بلوتوث" }
+            ]
         };
 
-        // --- المتغيرات العامة ---
-        let players = []; // Array of objects: { name: "Ali", score: 0 }
-        let selectedDifficulty = ""; // "easy" or "hard"
-        let currentSpyIndex = -1;
-        let currentWordObj = {};
-        let currentPlayerIndex = 0;
-        
-        // متغيرات التصويت
-        let votes = []; // Array to store votes: [targetIndex, targetIndex, ...] (matches players index)
-        let currentVoterIndex = 0;
+        // --- متغيرات الحالة ---
+        let players = [];
+        let difficulty = 'hard';
+        let currentSpyIdx = -1;
+        let wordObj = {};
+        let currentPlayerIdx = 0;
+        let votes = [];
+        let currentVoterIdx = 0;
 
         // --- الدوال ---
 
         function processNames() {
-            const input = document.getElementById('playerNamesInput').value;
-            const namesList = input.split('\n').filter(n => n.trim() !== "");
-            
-            if (namesList.length < 3) {
-                alert("⚠️ العدد قليل! نحتاج 3 لاعبين على الأقل.");
+            const txt = document.getElementById('playerNamesInput').value;
+            const lines = txt.split('\n').filter(l => l.trim() !== '');
+            if (lines.length < 3) {
+                alert("⚠️ يرجى إدخال 3 لاعبين على الأقل");
                 return;
             }
-
-            // تهيئة اللاعبين مع تصفير النقاط
-            players = namesList.map(name => ({ name: name.trim(), score: 0 }));
-
-            document.getElementById('screen-setup').classList.add('hidden');
-            document.getElementById('screen-difficulty').classList.remove('hidden');
+            players = lines.map(n => ({ name: n.trim(), score: 0 }));
+            switchScreen('screen-setup', 'screen-difficulty');
         }
 
         function showRules(level) {
-            selectedDifficulty = level;
+            difficulty = level;
+            switchScreen('screen-difficulty', 'screen-rules');
             const title = document.getElementById('rulesTitle');
-            const text = document.getElementById('rulesText');
-
-            document.getElementById('screen-difficulty').classList.add('hidden');
-            document.getElementById('screen-rules').classList.remove('hidden');
-
+            const list = document.getElementById('rulesList');
+            
             if (level === 'hard') {
-                title.innerText = "🔥 المستوى الصعب (الكلاسيكي)";
-                text.innerHTML = `
-                    <ul>
-                        <li>يتم اختيار جاسوس واحد عشوائياً.</li>
-                        <li>المواطنون يحصلون على كلمة موحدة (مثلاً: أسد).</li>
-                        <li><b>الجاسوس يحصل على كلمة مختلفة لكن مشابهة</b> (مثلاً: نمر).</li>
-                        <li>الجاسوس لا يعلم أنه الجاسوس في البداية! عليه أن يكتشف ذلك من سياق الكلام.</li>
-                        <li>الفائز هو من يجمع أكبر عدد نقاط.</li>
-                    </ul>
+                title.innerText = "🔥 المستوى الصعب";
+                list.innerHTML = `
+                    <li>يوجد جاسوس واحد بكلمة مختلفة لكن <b>مشابهة جداً</b>.</li>
+                    <li>الجاسوس <b>لا يعلم</b> أنه الجاسوس، ويرى كلمته كأنها عادية.</li>
+                    <li>عليه اكتشاف أنه الدخيل من سياق الكلام!</li>
                 `;
             } else {
                 title.innerText = "😌 المستوى السهل";
-                text.innerHTML = `
-                    <ul>
-                        <li>يتم اختيار جاسوس واحد عشوائياً.</li>
-                        <li>المواطنون يحصلون على كلمة موحدة (مثلاً: أسد).</li>
-                        <li><b>الجاسوس تظهر له رسالة: "أنت الجاسوس!"</b> ولا يعرف كلمة المواطنين.</li>
-                        <li>مهمة الجاسوس أصعب في معرفة الموضوع، لكنه يعلم أنه يجب أن يكذب.</li>
-                        <li>الفائز هو من يجمع أكبر عدد نقاط.</li>
-                    </ul>
+                list.innerHTML = `
+                    <li>الجاسوس ستظهر له بطاقة حمراء تخبره أنه الجاسوس.</li>
+                    <li>الجاسوس لا يملك كلمة، عليه التأليف وخداعكم!</li>
                 `;
             }
         }
 
-        function goBackToDifficulty() {
-            document.getElementById('screen-rules').classList.add('hidden');
-            document.getElementById('screen-difficulty').classList.remove('hidden');
-        }
-
         function confirmDifficulty() {
-            document.getElementById('screen-rules').classList.add('hidden');
-            document.getElementById('screen-category').classList.remove('hidden');
+            switchScreen('screen-rules', 'screen-category');
         }
 
-        function startGame(category) {
-            // إعداد الخلفية
-            document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('${bgImages[category] || bgImages.default}')`;
+        function goBackToDifficulty() {
+            switchScreen('screen-rules', 'screen-difficulty');
+        }
 
-            // اختيار الكلمات
-            const list = data[category];
-            const rand = Math.floor(Math.random() * list.length);
-            currentWordObj = list[rand];
-
-            // اختيار الجاسوس
-            currentSpyIndex = Math.floor(Math.random() * players.length);
-            
-            // بدء التوزيع
-            currentPlayerIndex = 0;
-            document.getElementById('screen-category').classList.add('hidden');
+        function startGame(cat) {
+            const arr = data[cat] || data.football;
+            wordObj = arr[Math.floor(Math.random() * arr.length)];
+            currentSpyIdx = Math.floor(Math.random() * players.length);
+            currentPlayerIdx = 0;
             updatePassScreen();
+            switchScreen('screen-category', 'screen-pass');
         }
 
         function updatePassScreen() {
-            if (currentPlayerIndex >= players.length) {
-                // انتهى التوزيع، الذهاب للنقاش
-                document.getElementById('screen-pass').classList.add('hidden');
-                document.getElementById('screen-reveal').classList.add('hidden');
-                document.getElementById('screen-discussion').classList.remove('hidden');
+            if (currentPlayerIdx >= players.length) {
+                switchScreen('screen-pass', 'screen-discussion');
                 return;
             }
-
+            // إعادة ضبط البطاقة لوضعها الطبيعي
+            document.querySelector('.flip-card').classList.remove('flipped');
             document.getElementById('screen-reveal').classList.add('hidden');
             document.getElementById('screen-pass').classList.remove('hidden');
-            document.getElementById('currentPlayerName').innerText = players[currentPlayerIndex].name;
+            document.getElementById('currentPlayerName').innerText = players[currentPlayerIdx].name;
         }
 
-        function showRole() {
-            const isSpy = (currentPlayerIndex === currentSpyIndex);
-            const name = players[currentPlayerIndex].name;
-            const revealName = document.getElementById('revealName');
-            const theWord = document.getElementById('theWord');
-            const hint = document.getElementById('spyHint');
+        function showRoleScreen() {
+            switchScreen('screen-pass', 'screen-reveal');
+            
+            const isSpy = (currentPlayerIdx === currentSpyIdx);
+            const name = players[currentPlayerIdx].name;
+            const wordEl = document.getElementById('theWord');
+            const hintEl = document.getElementById('spyHint');
 
-            revealName.innerText = name;
+            document.getElementById('revealName').innerText = name;
 
+            // المنطق الحاسم للألوان والنصوص
             if (isSpy) {
-                if (selectedDifficulty === 'easy') {
-                    theWord.innerText = "🤫 أنت الجاسوس!";
-                    theWord.style.color = "#c0392b";
-                    hint.innerText = "حاول معرفة الموضوع من كلام الآخرين واخدعهم!";
+                if (difficulty === 'easy') {
+                    // السهل: أحمر وصريح
+                    wordEl.innerText = "أنت الجاسوس! 🤫";
+                    wordEl.style.color = "#c0392b";
+                    hintEl.innerText = "لا يوجد كلمة.. اخدعهم!";
                 } else {
-                    // Hard mode: Spy gets the similar word
-                    theWord.innerText = currentWordObj.spy;
-                    theWord.style.color = "#27ae60";
-                    hint.innerText = "اكشف الدخيل!";
+                    // الصعب: أخضر ومموه (نفس لون المواطنين)
+                    wordEl.innerText = wordObj.spy;
+                    wordEl.style.color = "#27ae60"; // ✅ اللون الأخضر (تصحيح الثغرة)
+                    hintEl.innerText = "كلمتك السرية (احفظها)";
                 }
             } else {
-                theWord.innerText = currentWordObj.common;
-                theWord.style.color = "#27ae60";
-                hint.innerText = "اكشف الدخيل!";
+                // مواطن
+                wordEl.innerText = wordObj.common;
+                wordEl.style.color = "#27ae60";
+                hintEl.innerText = "كلمتك السرية (احفظها)";
             }
+        }
 
-            document.getElementById('screen-pass').classList.add('hidden');
-            document.getElementById('screen-reveal').classList.remove('hidden');
+        function flipCard() {
+            playSound('flip');
+            document.querySelector('.flip-card').classList.toggle('flipped');
         }
 
         function nextPlayer() {
-            currentPlayerIndex++;
+            currentPlayerIdx++;
             updatePassScreen();
         }
 
-        // --- منطق التصويت ---
+        // --- التصويت ---
 
         function startVotingSetup() {
-            document.getElementById('screen-discussion').classList.add('hidden');
-            currentVoterIndex = 0;
-            votes = new Array(players.length).fill(-1); // تهيئة التصويت
-            updateVotePassScreen();
+            currentVoterIdx = 0;
+            votes = new Array(players.length).fill(-1);
+            switchScreen('screen-discussion', 'screen-vote-pass');
+            updateVotePass();
         }
 
-        function updateVotePassScreen() {
-            if (currentVoterIndex >= players.length) {
-                calcResults();
+        function updateVotePass() {
+            if (currentVoterIdx >= players.length) {
+                calculateResults();
                 return;
             }
             document.getElementById('screen-vote-action').classList.add('hidden');
             document.getElementById('screen-vote-pass').classList.remove('hidden');
-            document.getElementById('currentVoterName').innerText = players[currentVoterIndex].name;
+            document.getElementById('currentVoterName').innerText = players[currentVoterIdx].name;
         }
 
         function showVotingScreen() {
-            document.getElementById('screen-vote-pass').classList.add('hidden');
-            document.getElementById('screen-vote-action').classList.remove('hidden');
+            switchScreen('screen-vote-pass', 'screen-vote-action');
+            document.getElementById('voterNameAction').innerText = players[currentVoterIdx].name;
             
-            const voterName = players[currentVoterIndex].name;
-            document.getElementById('voterNameAction').innerText = voterName;
-
             const container = document.getElementById('votingButtonsContainer');
-            container.innerHTML = ""; // مسح الأزرار القديمة
-
-            // إنشاء أزرار لكل اللاعبين (ما عدا الشخص نفسه)
-            players.forEach((p, index) => {
-                if (index !== currentVoterIndex) {
+            container.innerHTML = '';
+            
+            players.forEach((p, idx) => {
+                if (idx !== currentVoterIdx) {
                     const btn = document.createElement('button');
-                    btn.className = "vote-btn";
+                    btn.className = 'vote-btn';
                     btn.innerText = `أشك في ${p.name}`;
-                    btn.onclick = function() { submitVote(index); };
+                    btn.onclick = () => {
+                        playSound('click');
+                        votes[currentVoterIdx] = idx;
+                        currentVoterIdx++;
+                        updateVotePass();
+                    };
                     container.appendChild(btn);
                 }
             });
         }
 
-        function submitVote(targetIndex) {
-            votes[currentVoterIndex] = targetIndex;
-            currentVoterIndex++;
-            updateVotePassScreen();
-        }
+        function calculateResults() {
+            switchScreen('screen-vote-action', 'screen-results');
+            playSound('win');
 
-        // --- الحساب والنتائج ---
+            // عرض الحقائق
+            document.getElementById('realSpyName').innerText = players[currentSpyIdx].name;
+            document.getElementById('citizenWordDisplay').innerText = wordObj.common;
+            document.getElementById('spyWordResultDisplay').innerText = (difficulty === 'easy') ? "(لا يوجد)" : wordObj.spy;
 
-        function calcResults() {
-            document.getElementById('screen-vote-action').classList.add('hidden');
-            document.getElementById('screen-results').classList.remove('hidden');
-
-            // عرض المعلومات
-            document.getElementById('realSpyName').innerText = players[currentSpyIndex].name;
-            document.getElementById('citizenWordDisplay').innerText = currentWordObj.common;
-            
-            if (selectedDifficulty === 'easy') {
-                document.getElementById('spyWordResultDisplay').innerText = "(لا يوجد كلمة)";
-            } else {
-                document.getElementById('spyWordResultDisplay').innerText = currentWordObj.spy;
-            }
-
-            // حساب النقاط
-            // 1. كل مواطن صوت للجاسوس يأخذ نقطة
-            // 2. الجاسوس يأخذ نقطة عن كل شخص لم يصوت عليه
-            
-            // نحتاج لحفظ من صوت لمن لتوزيع النقاط
-            for (let i = 0; i < players.length; i++) {
-                if (i === currentSpyIndex) {
-                    // هذا هو الجاسوس، نحسب كم شخص نجا منه
-                    // (سيتم حساب نقاطه بناء على تصويتات الآخرين)
-                } else {
-                    // هذا مواطن
-                    if (votes[i] === currentSpyIndex) {
-                        players[i].score += 10; // 10 نقاط لكشف الجاسوس
-                    }
-                }
-            }
-
-            // حساب نقاط الجاسوس
+            // الحساب
             let votesAgainstSpy = 0;
-            votes.forEach((votedForIndex, voterIndex) => {
-                if (votedForIndex === currentSpyIndex) {
-                    votesAgainstSpy++;
+
+            for (let i = 0; i < players.length; i++) {
+                // إذا لم يكن هو الجاسوس، وصوت ضد الجاسوس = +10 نقاط
+                if (i !== currentSpyIdx && votes[i] === currentSpyIdx) {
+                    players[i].score += 10;
                 }
-            });
+                // حساب الأصوات ضد الجاسوس
+                if (votes[i] === currentSpyIdx) votesAgainstSpy++;
+            }
 
-            // الجاسوس يحصل على نقاط مقابل كل شخص خدعه
-            // عدد الأشخاص الذين خدعهم = (عدد اللاعبين - 1 "الجاسوس نفسه") - (الأصوات ضده)
-            const peopleFooled = (players.length - 1) - votesAgainstSpy;
-            players[currentSpyIndex].score += (peopleFooled * 5); // 5 نقاط عن كل شخص خدعه
+            // نقاط الجاسوس: +5 عن كل شخص لم يصوت ضده
+            const survivors = (players.length - 1) - votesAgainstSpy;
+            players[currentSpyIdx].score += (survivors * 5);
 
-            updateScoreTable();
-        }
-
-        function updateScoreTable() {
+            // تحديث الجدول
             const tbody = document.getElementById('scoreTableBody');
-            tbody.innerHTML = "";
+            tbody.innerHTML = '';
             
-            // ترتيب اللاعبين حسب النقاط
-            const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
-
-            sortedPlayers.forEach(p => {
+            // ترتيب
+            [...players].sort((a,b) => b.score - a.score).forEach(p => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td>${p.name}</td><td>${p.score}</td>`;
+                tr.innerHTML = `
+                    <td style="color:white; font-weight:bold;">${p.name}</td>
+                    <td style="color:var(--gold); font-weight:bold;">${p.score}</td>
+                `;
                 tbody.appendChild(tr);
             });
         }
 
         function playAgain() {
-            // إعادة تعيين الجولة مع الاحتفاظ بالنقاط والأسماء
-            document.getElementById('screen-results').classList.add('hidden');
-            document.getElementById('screen-category').classList.remove('hidden');
-            
-            // إعادة ضبط خلفية الشاشة لحيادية
-            document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('${bgImages.default}')`;
+            switchScreen('screen-results', 'screen-category');
         }
 
+        // دالة مساعدة للتنقل
+        function switchScreen(hideId, showId) {
+            document.getElementById(hideId).classList.add('hidden');
+            document.getElementById(showId).classList.remove('hidden');
+        }
     </script>
 </body>
 </html>
-
-
